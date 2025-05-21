@@ -1,0 +1,1359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moontech - Code Library</title>
+	<link rel="canonical" href="https://www.ryzamarket.my.id/code/index.html" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+    </style>
+<link rel="stylesheet" href="../code/code.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <a href="#" class="nav-back">
+            <i class="fas fa-arrow-left"></i>
+        </a>
+        <div class="nav-title">Code Library</div>
+    </nav>
+    <!-- Decorative floating elements -->
+    <div class="floating"></div>
+    <div class="floating"></div>
+    <div class="floating"></div>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <!-- Replace the src with your actual logo URL -->
+                <img src="../code/img/logo.png" alt="Moontech">
+                <h1>Moontech CodeX</h1>
+            </div>
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="Search codes...">
+                <i class="fas fa-search"></i>
+            </div>
+        </header>
+        <!-- Categories -->
+        <div class="categories-container">
+            <div class="scroll-indicator left" id="scrollLeft">
+                <i class="fas fa-chevron-left"></i>
+            </div>
+            <div class="categories" id="categories">
+                <button class="category-btn active" data-category="all">All Codes</button>
+                <button class="category-btn" data-category="downloader">Downloader</button>
+                <button class="category-btn" data-category="islami">Islami</button>
+                <button class="category-btn" data-category="convert">Convert</button>
+                <button class="category-btn" data-category="fun">Fun</button>
+                <button class="category-btn" data-category="searching">Searching</button>
+                <button class="category-btn" data-category="maker">Maker</button>
+                <button class="category-btn" data-category="stalker">Stalker</button>
+                <button class="category-btn" data-category="ai">Ai</button>
+                <button class="category-btn" data-category="news">News</button>
+            </div>
+            <div class="scroll-indicator right" id="scrollRight">
+                <i class="fas fa-chevron-right"></i>
+            </div>
+        </div>
+        <!-- Code Grid -->
+        <div class="code-grid" id="codeGrid">
+          <div class="code-card" data-category="fun">
+            <div class="card-header" onclick="toggleCodeCard(this)">
+                <div class="card-title">CEK KHODAM</div>
+                <div class="badge">GET<i class="fas fa-chevron-down toggle-arrow"></i></div>
+            </div>
+            <div class="card-body">
+                <div class="code-container">
+                    <button class="copy-btn" onclick="copyCode(this)">
+                        <i class="fas fa-copy"></i>
+                    </button>
+                    <pre><code>
+case "cekkhodam":
+                      if (!text) return await sendFancyReply(m, "⚠ Harap masukkan nama target!\n\n*Contoh:* .cekkhodam Andika");
+                      // Load khodam list
+                      const khodamList = require('./lib/khodamList');
+                      // Database file (nama -> khodam)
+                      const khodamDBFile = './database/khodam.json';
+                      // Buat file jika belum ada
+                      if (!fs.existsSync(khodamDBFile)) {
+                          fs.writeFileSync(khodamDBFile, JSON.stringify({}, null, 2));
+                      }
+                      let namaTarget = text.trim(); // Normalisasi nama
+                      const khodamDB = JSON.parse(fs.readFileSync(khodamDBFile));
+                      let randomKhodam;
+                      // Cek apakah nama sudah ada di database
+                      if (khodamDB[namaTarget]) {
+                          // Jika nama sudah ada, gunakan khodam yang sama
+                          randomKhodam = khodamDB[namaTarget];
+                      } else {
+                          // Jika nama baru, assign khodam random
+                          randomKhodam = khodamList[Math.floor(Math.random() * khodamList.length)];
+                          // Simpan ke database
+                          khodamDB[namaTarget] = randomKhodam;
+                          fs.writeFileSync(khodamDBFile, JSON.stringify(khodamDB, null, 2));
+                      }
+                      // Hasilnya
+                      let resultText = ━━━━━━━━━━━━━━━━━━━━━━━━━\n +
+                                       🔮 *CEK KHODAM* 🔮\n +
+                                       ━━━━━━━━━━━━━━━━━━━━━━━━━\n\n +
+                                       📜 *Nama:* ${namaTarget}\n +
+                                       🕊 *Khodam Anda:* ${randomKhodam}\n\n +
+                                       ━━━━━━━━━━━━━━━━━━━━━━━━━;
+                      await sendFancyReply(m, resultText);
+                      // TTS (opsional)
+                      const gtts = require("node-gtts");
+                      let ttsText = Khodam ${namaTarget} adalah ${randomKhodam};
+                      try {
+                          let audioBuffer = await new Promise((resolve) => {
+                              let tts = gtts("id");
+                              let filePath = khodam_${Date.now()}.mp3;
+                              tts.save(filePath, ttsText, () => {
+                                  resolve(fs.readFileSync(filePath));
+                                  fs.unlinkSync(filePath);
+                              });
+                          });
+                          await ryz.sendMessage(m.chat, { 
+                              audio: audioBuffer, 
+                              mimetype: "audio/mpeg",
+                              ptt: true
+                          }, { quoted: m });
+                      } catch (e) {
+                          console.error("Gagal membuat TTS:", e);
+                      }
+                      break;
+                  // buat file khodamlist.js, taro code ini di file itu, bisa kamu tambahin juga khodam nya 
+                  module.exports = [
+                    "Sandal Jepit",
+                    "Sempak Kuda",
+                    "Gayung",
+                    "Gelas Plastik",
+                    "Botol Bekas",
+                    "Sapu Ibu",
+                    "Kardus Indomie",
+                    "Karet Gelang",
+                    "Tutup Panci",
+                    "Sendok Warteg",
+                    "Bantal Lepek",
+                    "Topi Tambal",
+                    "Jaket Tipis",
+                    "Celana Robek",
+                    "Kaus Oblong",
+                    "Kipas Angin Rusak"
+                  ];
+                        </code></pre>
+                </div>
+                <div class="file-info">
+                    <span>Type : JavaScript</span>
+                    <span>99% working</span>
+                </div>
+            </div>
+            <div class="stats">
+                <span><i class="fas fa-copy"></i> 99+ copies</span>
+                <span><i class="fas fa-calendar-alt"></i> Updated : 30 April 2025</span>
+            </div>
+        </div>
+          <div class="code-card" data-category="convert">
+            <div class="card-header" onclick="toggleCodeCard(this)">
+                <div class="card-title">STICKER WATERMARK</div>
+                <div class="badge">GET<i class="fas fa-chevron-down toggle-arrow"></i></div>
+            </div>
+            <div class="card-body">
+                <div class="code-container">
+                    <button class="copy-btn" onclick="copyCode(this)">
+                        <i class="fas fa-copy"></i>
+                    </button>
+                    <pre><code>
+case 'swm': {
+                        if (!text.includes('|')) return m.reply(⚠ Kirim atau reply gambar/video dengan caption:\n\n${prefix + command} NamaPack|Author);
+                        let [teks1, teks2] = text.split('|');
+                        if (!teks1 || !teks2) return m.reply(⚠ Format salah! Contoh:\n${prefix + command} NamaPack|Author);
+                        const q = m.quoted || m;
+                        const mime = (q.msg || q).mimetype || "";
+                        if (!mime) return m.reply("⚠ Harap reply ke gambar atau video!");
+                        try {
+                            if (/image/.test(mime)) {
+                                const media = await conn.downloadMediaMessage(q);
+                                const sticker = await conn.sendImageAsSticker(m.chat, media, m, {
+                                    packname: teks1,
+                                    author: teks2
+                                });
+                                await fs.unlinkSync(sticker);
+                            } else if (/video/.test(mime)) {
+                                const duration = (q.msg || q).seconds || 0;
+                                if (duration > 10) return m.reply("⚠ Durasi video maksimal 10 detik!");
+                                const media = await conn.downloadMediaMessage(q);
+                                const sticker = await conn.sendVideoAsSticker(m.chat, media, m, {
+                                    packname: teks1,
+                                    author: teks2
+                                });
+                                await fs.unlinkSync(sticker);
+                            } else {
+                                return m.reply(⚠ Kirim atau reply Gambar/Video dengan caption:\n${prefix + command} NamaPack|Author\n\nDurasi video maksimal 10 detik);
+                            }
+                        } catch (err) {
+                            console.error(err);
+                            m.reply("❌ Gagal membuat sticker.");
+                        }
+                    }
+                    break;
+                        </code></pre>
+                </div>
+                <div class="file-info">
+                    <span>Type : JavaScript</span>
+                    <span>99% working</span>
+                </div>
+            </div>
+            <div class="stats">
+                <span><i class="fas fa-copy"></i> 99+ copies</span>
+                <span><i class="fas fa-calendar-alt"></i> Updated : 30 April 2025</span>
+            </div>
+        </div>
+          <div class="code-card" data-category="downloader">
+            <div class="card-header" onclick="toggleCodeCard(this)">
+                <div class="card-title">MEDIAFIRE DOWNLOADER</div>
+                <div class="badge">GET<i class="fas fa-chevron-down toggle-arrow"></i></div>
+            </div>
+            <div class="card-body">
+                <div class="code-container">
+                    <button class="copy-btn" onclick="copyCode(this)">
+                        <i class="fas fa-copy"></i>
+                    </button>
+                    <pre><code>
+case "mediafire": {
+                        if (!text) return m.reply("⚠ Masukkan link MediaFire yang ingin diunduh!\n\nContoh:\n.mediafire https://www.mediafire.com/file/example");
+                        await conn.sendMessage(m.chat, { react: { text: "⏳", key: m.key } });
+                        try {
+                            const res = await fetch('https://r.jina.ai/' + text, {
+                                headers: { 'x-return-format': 'html' }
+                            });
+                            if (!res.ok) throw new Error("Gagal mengambil data dari MediaFire!");
+                            const cheerio = require('cheerio');
+                            const html = await res.text();
+                            const $ = cheerio.load(html);
+                            const TimeMatch = $('div.DLExtraInfo-uploadLocation div.DLExtraInfo-sectionDetails')
+                                .text()
+                                .match(/This file was uploaded from (.?) on (.?) at (.*?)\n/);
+                            const fileSize = $('a#downloadButton').text().trim().split('\n')[0].trim();
+                            const result = {
+                                title: $('div.dl-btn-label').text().trim() || "Tidak diketahui",
+                                filename: $('div.dl-btn-label').attr('title') || "file",
+                                url: $('a#downloadButton').attr('href'),
+                                size: fileSize || "Tidak diketahui",
+                                from: TimeMatch?.[1] || "Tidak diketahui",
+                                date: TimeMatch?.[2] || "Tidak diketahui",
+                                time: TimeMatch?.[3] || "Tidak diketahui"
+                            };
+                            if (!result.url) throw new Error("Gagal mendapatkan link unduhan!");
+                            const caption = ✅ *Berhasil mengambil file MediaFire!*\n\n
+                                + 📂 *Nama:* ${result.filename}\n
+                                + 📦 *Ukuran:* ${result.size}\n
+                                + 📅 *Tanggal:* ${result.date}\n
+                                + ⏰ *Waktu:* ${result.time}\n
+                                + 🌍 *Dari:* ${result.from}\n\n
+                                + 🔗 *Link:* ${result.url};
+                            await conn.sendMessage(m.chat, {
+                                document: { url: result.url },
+                                mimetype: 'application/octet-stream',
+                                fileName: result.filename,
+                                caption
+                            }, { quoted: m });
+                            await conn.sendMessage(m.chat, { react: { text: "✅", key: m.key } });
+                        } catch (error) {
+                            console.error(error);
+                            await conn.sendMessage(m.chat, { react: { text: "❌", key: m.key } });
+                            m.reply("❌ Gagal mengambil data dari MediaFire.");
+                        }
+                    }
+                    break;
+                        </code></pre>
+                </div>
+                <div class="file-info">
+                    <span>Type : JavaScript</span>
+                    <span>99% working</span>
+                </div>
+            </div>
+            <div class="stats">
+                <span><i class="fas fa-copy"></i> 99+ copies</span>
+                <span><i class="fas fa-calendar-alt"></i> Updated : 30 April 2025</span>
+            </div>
+        </div>
+          <div class="code-card" data-category="convert">
+            <div class="card-header" onclick="toggleCodeCard(this)">
+                <div class="card-title">VIDEO TO AUDIO</div>
+                <div class="badge">GET<i class="fas fa-chevron-down toggle-arrow"></i></div>
+            </div>
+            <div class="card-body">
+                <div class="code-container">
+                    <button class="copy-btn" onclick="copyCode(this)">
+                        <i class="fas fa-copy"></i>
+                    </button>
+                    <pre><code>
+case "toaudio": {
+                        if (!m.quoted) return m.reply("⚠ Reply ke video yang ingin dikonversi ke audio!");
+                        const mime = m.quoted.mimetype || '';
+                        if (!/video/.test(mime)) return m.reply("❌ File yang direply bukan video!");
+                        await conn.sendMessage(m.chat, { react: { text: "⏳", key: m.key } });
+                        try {
+                            const media = await conn.downloadAndSaveMediaMessage(m.quoted);
+                            const outputFile = ./tmp/audio_${Date.now()}.mp3;
+                            exec(ffmpeg -i "${media}" -q:a 0 -map a "${outputFile}", async (err) => {
+                                if (err) {
+                                    console.error("❌ Error FFMPEG:", err);
+                                    await conn.sendMessage(m.chat, { react: { text: "❌", key: m.key } });
+                                    return m.reply("❌ Gagal mengonversi video ke audio.");
+                                }
+                                await conn.sendMessage(m.chat, {
+                                    audio: fs.readFileSync(outputFile),
+                                    mimetype: 'audio/mpeg',
+                                    fileName: 'audio.mp3'
+                                }, { quoted: m });
+                                await conn.sendMessage(m.chat, { react: { text: "✅", key: m.key } });
+                                fs.unlinkSync(media);
+                                fs.unlinkSync(outputFile);
+                            });
+                        } catch (error) {
+                            console.error("❌ Error saat proses:", error);
+                            await conn.sendMessage(m.chat, { react: { text: "❌", key: m.key } });
+                            m.reply("❌ Terjadi kesalahan saat memproses file.");
+                        }
+                    }
+                    break;
+                        </code></pre>
+                </div>
+                <div class="file-info">
+                    <span>Type : JavaScript</span>
+                    <span>99% working</span>
+                </div>
+            </div>
+            <div class="stats">
+                <span><i class="fas fa-copy"></i> 99+ copies</span>
+                <span><i class="fas fa-calendar-alt"></i> Updated : 30 April 2025</span>
+            </div>
+        </div>
+          <div class="code-card" data-category="convert">
+            <div class="card-header" onclick="toggleCodeCard(this)">
+                <div class="card-title">STICKER TO IMAGE</div>
+                <div class="badge">GET<i class="fas fa-chevron-down toggle-arrow"></i></div>
+            </div>
+            <div class="card-body">
+                <div class="code-container">
+                    <button class="copy-btn" onclick="copyCode(this)">
+                        <i class="fas fa-copy"></i>
+                    </button>
+                    <pre><code>
+case 'toimage':
+case 'toimg': {
+                          if (!m.quoted) return m.reply("⚠ Reply sticker yang ingin dikonversi ke gambar!");
+                          const mime = m.quoted.mimetype || '';
+                          if (!/webp/.test(mime)) return m.reply("❌ Hanya bisa digunakan untuk sticker!");
+                          await conn.sendMessage(m.chat, { react: { text: "⏳", key: m.key } });
+                          try {
+                              const mediaPath = await conn.downloadAndSaveMediaMessage(m.quoted);
+                              const inputPath = ./tmp/toimg_${Date.now()}.webp;
+                              const outputPath = ./tmp/toimg_${Date.now()}.png;
+                              fs.renameSync(mediaPath, inputPath);
+                              exec(ffmpeg -i "${inputPath}" "${outputPath}", async (err) => {
+                                  if (err) {
+                                      console.error("❌ FFMPEG Error:", err);
+                                      await conn.sendMessage(m.chat, { react: { text: "❌", key: m.key } });
+                                      return;
+                                  }
+                                  const buffer = fs.readFileSync(outputPath);
+                                  await conn.sendMessage(m.chat, {
+                                      image: buffer,
+                                      caption: "✅ Sticker berhasil dikonversi ke gambar!"
+                                  }, { quoted: m });
+                                  await conn.sendMessage(m.chat, { react: { text: "✅", key: m.key } });
+                                  fs.unlinkSync(inputPath);
+                                  fs.unlinkSync(outputPath);
+                              });
+                          } catch (error) {
+                              console.error("❌ Download Error:", error);
+                              await conn.sendMessage(m.chat, { react: { text: "❌", key: m.key } });
+                          }
+                      }
+                      break;
+                        </code></pre>
+                </div>
+                <div class="file-info">
+                    <span>Type : JavaScript</span>
+                    <span>99% working</span>
+                </div>
+            </div>
+            <div class="stats">
+                <span><i class="fas fa-copy"></i> 99+ copies</span>
+                <span><i class="fas fa-calendar-alt"></i> Updated : 30 April 2025</span>
+            </div>
+        </div>
+          <div class="code-card" data-category="maker">
+            <div class="card-header" onclick="toggleCodeCard(this)">
+                <div class="card-title">SMEME STICKER</div>
+                <div class="badge">GET<i class="fas fa-chevron-down toggle-arrow"></i></div>
+            </div>
+            <div class="card-body">
+                <div class="code-container">
+                    <button class="copy-btn" onclick="copyCode(this)">
+                        <i class="fas fa-copy"></i>
+                    </button>
+                    <pre><code>
+case "smeme": {
+                        if (!m.quoted) return m.reply(> Cara penggunaan:\n${prefix + command} <teks atas>|<teks bawah>\n\nContoh:\n${prefix + command} Ini teks atas|Ini teks bawah\n\n*Reply gambarnya!*);
+                        const { Sticker } = require('wa-sticker-formatter');
+                        const FormData = require('form-data');
+                        async function uploadImage(filePath) {
+                            try {
+                                const form = new FormData();
+                                form.append('files[]', fs.createReadStream(filePath));
+                                const { data } = await axios.post('https://uguu.se/upload', form, {
+                                    headers: { ...form.getHeaders() }
+                                });
+                                return data.files[0].url;
+                            } catch (err) {
+                                throw new Error("Upload gagal: " + err.message);
+                            }
+                        }
+                        async function createSticker(img, url) {
+                            const stickerMetadata = {
+                                type: "full",
+                                pack: global.packname,
+                                author: global.author,
+                                quality: 100
+                            };
+                            return (new Sticker(img || url, stickerMetadata)).toBuffer();
+                        }
+                        const [atas, bawah] = text.split('|');
+                        const q = m.quoted ? m.quoted : m;
+                        const mime = (q.msg || q).mimetype || "";
+                        if (!mime.startsWith('image/')) return m.reply("❌ Hanya bisa digunakan untuk gambar!");
+                        await conn.sendMessage(m.chat, { react: { text: "⏳", key: m.key } });
+                        const mediaBuffer = await q.download();
+                        const ext = mime.split('/')[1] || "png";
+                        const tempFile = path.join(__dirname, temp_${Date.now()}.${ext});
+                        fs.writeFileSync(tempFile, mediaBuffer);
+                        try {
+                            const url = await uploadImage(tempFile);
+                            const memeUrl = https://api.memegen.link/images/custom/${encodeURIComponent(atas || "_")}/${encodeURIComponent(bawah || "_")}.png?background=${url};
+                            const stickerBuffer = await createSticker(memeUrl, false);
+                            await conn.sendMessage(m.chat, { sticker: stickerBuffer }, { quoted: m });
+                            await conn.sendMessage(m.chat, { react: { text: "✅", key: m.key } });
+                        } catch (err) {
+                            console.error("Error smeme:", err);
+                            await m.reply("❌ Terjadi kesalahan saat membuat meme sticker.");
+                            await conn.sendMessage(m.chat, { react: { text: "❌", key: m.key } });
+                        } finally {
+                            fs.unlinkSync(tempFile);
+                        }
+                    }
+                    break;
+                        </code></pre>
+                </div>
+                <div class="file-info">
+                    <span>Type : JavaScript</span>
+                    <span>99% working</span>
+                </div>
+            </div>
+            <div class="stats">
+                <span><i class="fas fa-copy"></i> 99+ copies</span>
+                <span><i class="fas fa-calendar-alt"></i> Updated : 30 April 2025</span>
+            </div>
+        </div>
+          <div class="code-card" data-category="maker">
+            <div class="card-header" onclick="toggleCodeCard(this)">
+                <div class="card-title">BRAT ANIME</div>
+                <div class="badge">GET<i class="fas fa-chevron-down toggle-arrow"></i></div>
+            </div>
+            <div class="card-body">
+                <div class="code-container">
+                    <button class="copy-btn" onclick="copyCode(this)">
+                        <i class="fas fa-copy"></i>
+                    </button>
+                    <pre><code>
+case "bratanime": {
+                        if (!text) return m.reply(⚠ Masukkan teks yang ingin ditampilkan!\n\nContoh: ${prefix + command} Ryza-Bot);
+                        if (text.length > 25) {
+                            return m.reply(⚠ Maksimal 25 huruf!\n\nAnda memasukkan ${text.length} huruf.);
+                        }
+                        try {
+                            await conn.sendMessage(m.chat, { react: { text: "⏳", key: m.key } });
+                            const imageUrl = "https://files.catbox.moe/v00rdx.jpg"; // Gambar template
+                            const tempPath = "./tmp/tulisanime_temp.jpg";
+                            const outputPath = "./tmp/tulisanime_result.png";
+                            const response = await axios({ 
+                                url: imageUrl, 
+                                responseType: "arraybuffer",
+                                timeout: 30000
+                            });
+                            if (!fs.existsSync("./tmp")) {
+                                fs.mkdirSync("./tmp", { recursive: true });
+                            }
+                            fs.writeFileSync(tempPath, response.data);
+                            const image = await Jimp.read(tempPath);
+                            const font = await Jimp.loadFont(Jimp.FONT_SANS_64_BLACK);
+                            const x = 370;
+                            const y = 660;
+                            const maxWidth = 300;
+                            const maxHeight = 170;
+                            image.print(
+                                font, 
+                                x, 
+                                y, 
+                                {
+                                    text: text,
+                                    alignmentX: Jimp.HORIZONTAL_ALIGN_CENTER,
+                                    alignmentY: Jimp.VERTICAL_ALIGN_MIDDLE
+                                }, 
+                                maxWidth,
+                                maxHeight
+                            );
+                            await image.writeAsync(outputPath);
+                            await conn.sendMessage(m.chat, { 
+                                image: fs.readFileSync(outputPath), 
+                                caption: 🖼 *Brat Anime Selesai!*
+                            }, { quoted: m });
+                            fs.unlinkSync(tempPath);
+                            fs.unlinkSync(outputPath);
+                            await conn.sendMessage(m.chat, { react: { text: "✅", key: m.key } });
+                        } catch (error) {
+                            console.error("Error in bratanime:", error);
+                            if (fs.existsSync(tempPath)) fs.unlinkSync(tempPath);
+                            if (fs.existsSync(outputPath)) fs.unlinkSync(outputPath);
+                            await m.reply("❌ Gagal memproses gambar. Silakan coba lagi nanti.");
+                            await conn.sendMessage(m.chat, { react: { text: "❌", key: m.key } });
+                        }
+                    }
+                    break;
+                        </code></pre>
+                </div>
+                <div class="file-info">
+                    <span>Type : JavaScript</span>
+                    <span>99% working</span>
+                </div>
+            </div>
+            <div class="stats">
+                <span><i class="fas fa-copy"></i> 99+ copies</span>
+                <span><i class="fas fa-calendar-alt"></i> Updated : 30 April 2025</span>
+            </div>
+        </div>
+          <div class="code-card" data-category="islami">
+            <div class="card-header" onclick="toggleCodeCard(this)">
+                <div class="card-title">KISAH NABI</div>
+                <div class="badge">GET<i class="fas fa-chevron-down toggle-arrow"></i></div>
+            </div>
+            <div class="card-body">
+                <div class="code-container">
+                    <button class="copy-btn" onclick="copyCode(this)">
+                        <i class="fas fa-copy"></i>
+                    </button>
+                    <pre><code>
+case "kisahnabi":
+case "nabi": {
+                          if (!text) return m.reply("⚠ Masukkan nama nabi!\n\nContoh: .kisahnabi adam");
+                          try {
+                              await conn.sendMessage(m.chat, { react: { text: "📖", key: m.key } });
+                              const res = await fetch(https://raw.githubusercontent.com/ZeroChanBot/Api-Freee/main/data/kisahNabi/${text.toLowerCase()}.json);
+                              const kisah = await res.json().catch(() => null);
+                              if (!kisah) {
+                                  return m.reply("❌ Kisah nabi tidak ditemukan!\n📮 Tips: Coba masukkan nama nabi tanpa huruf kapital.");
+                              }
+                              const teks = `_👳 Nama Nabi:_ ${kisah.name}
+                      📅 Tanggal Lahir: ${kisah.thn_kelahiran}
+                      📍 Tempat Lahir: ${kisah.tmp}
+                      📊 Usia: ${kisah.usia}
+                      — — — — — [ K I S A H ] — — — — —
+                      ${kisah.description}`;
+                              await conn.sendMessage(m.chat, { text: teks }, { quoted: m });
+                          } catch (error) {
+                              await m.reply(❌ *Terjadi kesalahan:*\n${error.message});
+                              await conn.sendMessage(m.chat, { react: { text: "❌", key: m.key } });
+                          }
+                      }
+                      break;
+                        </code></pre>
+                </div>
+                <div class="file-info">
+                    <span>Type : JavaScript</span>
+                    <span>99% working</span>
+                </div>
+            </div>
+            <div class="stats">
+                <span><i class="fas fa-copy"></i> 99+ copies</span>
+                <span><i class="fas fa-calendar-alt"></i> Updated : 30 April 2025</span>
+            </div>
+        </div>
+          <div class="code-card" data-category="downloader">
+            <div class="card-header" onclick="toggleCodeCard(this)">
+                <div class="card-title">INSTAGRAM DOWNLOADER</div>
+                <div class="badge">GET<i class="fas fa-chevron-down toggle-arrow"></i></div>
+            </div>
+            <div class="card-body">
+                <div class="code-container">
+                    <button class="copy-btn" onclick="copyCode(this)">
+                        <i class="fas fa-copy"></i>
+                    </button>
+                    <pre><code>
+case "ig":
+case "instagram": {
+                          if (!text) return m.reply("📹 Gunakan format: \n\n`.ig <url>\n\nContoh:\n.ig https://www.instagram.com/reel/`");
+                          try {
+                              const res = await fetchJson(https://fastrestapis.fasturl.cloud/downup/igdown?url=${encodeURIComponent(text)});
+                              if (!res || !res.result?.status || !res.result?.data?.length) {
+                                  return m.reply("❌ Gagal: Tidak ada data ditemukan atau URL tidak valid.");
+                              }
+                              for (const item of res.result.data) {
+                                  if (item.thumbnail) {
+                                      await conn.sendMessage(m.chat, {
+                                          image: { url: item.thumbnail },
+                                          caption: '🖼 Gambar berhasil diunduh!\n\n👨‍💻 By: Roy~404~'
+                                      }, { quoted: m });
+                                  }
+                                  if (item.url) {
+                                      await conn.sendMessage(m.chat, {
+                                          video: { url: item.url },
+                                          caption: '🎥 Video berhasil diunduh!\n\n👨‍💻 By: Roy~404~'
+                                      }, { quoted: m });
+                                  }
+                              }
+                          } catch (error) {
+                              m.reply(❌ *Terjadi kesalahan:*\n${error.toString()});
+                          }
+                      }
+                      break;
+                        </code></pre>
+                </div>
+                <div class="file-info">
+                    <span>Type : JavaScript</span>
+                    <span>99% working</span>
+                </div>
+            </div>
+            <div class="stats">
+                <span><i class="fas fa-copy"></i> 99+ copies</span>
+                <span><i class="fas fa-calendar-alt"></i> Updated : 30 April 2025</span>
+            </div>
+        </div>
+          <div class="code-card" data-category="stalker">
+            <div class="card-header" onclick="toggleCodeCard(this)">
+                <div class="card-title">INSTAGRAM STALKER</div>
+                <div class="badge">GET<i class="fas fa-chevron-down toggle-arrow"></i></div>
+            </div>
+            <div class="card-body">
+                <div class="code-container">
+                    <button class="copy-btn" onclick="copyCode(this)">
+                        <i class="fas fa-copy"></i>
+                    </button>
+                    <pre><code>
+case 'igstalk': {
+                        if (!text) {
+                            return m.reply(
+                                "</> Instagram Stalk\n" +
+                                "──────────────────\n" +
+                                "Masukkan username Instagram yang ingin di-stalk\n\n" +
+                                Contoh: *.igstalk ryza.reth*
+                            );
+                        }
+                        try {
+                            // Ambil data dari API
+                            const apiUrl = https://fastrestapis.fasturl.cloud/stalk/instagram?username=${encodeURIComponent(text)};
+                            const response = await fetch(apiUrl);
+                            const data = await response.json();
+                            // Validasi response
+                            if (data.status !== 200) {
+                                return m.reply(
+                                    "❌ Gagal mendapatkan data\n" +
+                                    "──────────────────\n" +
+                                    "Beberapa kemungkinan penyebab:\n" +
+                                    "• Username tidak ditemukan\n" +
+                                    "• Akun diprivate\n" +
+                                    "• API sedang gangguan\n\n" +
+                                    "Coba lagi dengan username yang berbeda"
+                                );
+                            }
+                            const result = data.result;
+                            const topPost = result.mostLikedPosts?.[0];
+                            // Format hasil
+                            const caption = `
+                    </> PROFIL INSTAGRAM
+                    ──────────────────
+                    👤 Username: ${result.name || text}
+                    > Bio: ${result.description || 'Tidak ada bio'}
+                    📊 Statistik
+                    ├ 📸 Post: ${result.uploads || 0}
+                    ├ 👥 Followers: ${result.followers || 0}
+                    └ 📈 Engagement Rate: ${result.engagementRate || 'N/A'}%
+                    ${topPost ? 
+                    `🔥 Post Terpopuler
+                    ├ ❤ Likes: ${topPost.likes || 0}
+                    └ 💬 Komentar: ${topPost.comments || 0}`
+                    : ''}
+                    ──────────────────
+                    `.trim();
+                            // Kirim hasil
+                            await m.reply(caption);
+                            // Jika ada post terpopuler, kirim gambarnya (jika ada)
+                            if (topPost?.imageUrl) {
+                                await conn.sendMessage(m.chat, {
+                                    image: { url: topPost.imageUrl },
+                                    caption: 📷 Post terpopuler dari @${text}
+                                }, { quoted: m });
+                            }
+                        } catch (error) {
+                            console.error('Error igstalk:', error);
+                            await m.reply(
+                                "⚠ Terjadi kesalahan\n" +
+                                "──────────────────\n" +
+                                "Gagal mengambil data Instagram.\n" +
+                                "Silakan coba beberapa saat lagi."
+                            );
+                        }
+                    }
+                    break;
+                        </code></pre>
+                </div>
+                <div class="file-info">
+                    <span>Type : JavaScript</span>
+                    <span>99% working</span>
+                </div>
+            </div>
+            <div class="stats">
+                <span><i class="fas fa-copy"></i> 99+ copies</span>
+                <span><i class="fas fa-calendar-alt"></i> Updated : 30 April 2025</span>
+            </div>
+        </div>
+          <div class="code-card" data-category="stalker">
+            <div class="card-header" onclick="toggleCodeCard(this)">
+                <div class="card-title">TIKTOK STALKER</div>
+                <div class="badge">GET<i class="fas fa-chevron-down toggle-arrow"></i></div>
+            </div>
+            <div class="card-body">
+                <div class="code-container">
+                    <button class="copy-btn" onclick="copyCode(this)">
+                        <i class="fas fa-copy"></i>
+                    </button>
+                    <pre><code>
+case "tiktokstalk": 
+case "ttstalk": { 
+                          if (!text) return m.reply("Harap masukkan username TikTok!\n\nContoh: .tiktokstalk username");
+                          try {
+                              const res = await fetchJson(https://restapi-v2.simplebot.my.id/stalk/tiktok?user=${encodeURIComponent(text)});
+                              if (!res || !res.status) return m.reply("Nama pengguna tidak ditemukan!");
+                              const teks = *Informasi TikTok*\n\n> *Nama:* ${res.result.nickname}\n> *Username:* @${res.result.uniqueId}\n> *Bio:* ${res?.result?.signature || "Tidak ada bio"}\n> *Followers:* ${res.result.followerCount}\n;
+                              await conn.sendMessage(m.chat, { image: { url: res.result.avatarMedium }, caption: teks }, { quoted: m });
+                          } catch (error) {
+                              m.reply(❌ Terjadi kesalahan: ${error.toString()});
+                          }
+                      }
+                      break;
+                        </code></pre>
+                </div>
+                <div class="file-info">
+                    <span>Type : JavaScript</span>
+                    <span>99% working</span>
+                </div>
+            </div>
+            <div class="stats">
+                <span><i class="fas fa-copy"></i> 99+ copies</span>
+                <span><i class="fas fa-calendar-alt"></i> Updated : 30 April 2025</span>
+            </div>
+        </div>
+          <div class="code-card" data-category="news">
+            <div class="card-header" onclick="toggleCodeCard(this)">
+                <div class="card-title">LIPUTAN NEWS</div>
+                <div class="badge">GET<i class="fas fa-chevron-down toggle-arrow"></i></div>
+            </div>
+            <div class="card-body">
+                <div class="code-container">
+                    <button class="copy-btn" onclick="copyCode(this)">
+                        <i class="fas fa-copy"></i>
+                    </button>
+                    <pre><code>
+case 'liputannews':
+case 'beritaliputan': {
+                          try {
+                              m.reply("⏳ Mengambil berita terbaru dari LiputanNews...");
+                              const { data } = await axios.get('https://liputannews.id', {
+                                  headers: {
+                                      "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
+                                  },
+                                  timeout: 10000
+                              });
+                              const $ = cheerio.load(data);
+                              let results = [];
+                              $('.post.type-post.hentry').each((i, el) => {
+                                  if (results.length >= 5) return false;
+                                  const title = $(el).find('h2').text().trim();
+                                  const link = $(el).find('a').first().attr('href');
+                                  const thumbnail = $(el).find('img').attr('src');
+                                  if (title && link) {
+                                      results.push({
+                                          title,
+                                          link: link.startsWith('http') ? link : https://liputannews.id${link},
+                                          thumbnail: thumbnail ? (thumbnail.startsWith('http') ? thumbnail : https://liputannews.id${thumbnail}) : null
+                                      });
+                                  }
+                              });
+                              if (!results.length) return m.reply("Tidak dapat menemukan berita terbaru.");
+                              let newsText = 📰 *5 BERITA TERBARU LIPUTANNEWS*\n\n;
+                              results.forEach((item, i) => {
+                                  newsText += *${i + 1}. ${item.title}*\n;
+                                  newsText += 🔗 ${item.link}\n\n;
+                              });
+                              if (results[0].thumbnail) {
+                                  await conn.sendMessage(m.chat, {
+                                      image: { url: results[0].thumbnail },
+                                      caption: newsText
+                                  }, { quoted: m });
+                              } else {
+                                  m.reply(newsText);
+                              }
+                          } catch (e) {
+                              console.error("LiputanNews error:", e);
+                              m.reply("Gagal mengambil berita. Coba lagi nanti.");
+                          }
+                      }
+                      break;
+                        </code></pre>
+                </div>
+                <div class="file-info">
+                    <span>Type : JavaScript</span>
+                    <span>99% working</span>
+                </div>
+            </div>
+            <div class="stats">
+                <span><i class="fas fa-copy"></i> 99+ copies</span>
+                <span><i class="fas fa-calendar-alt"></i> Updated : 30 April 2025</span>
+            </div>
+        </div>
+          <div class="code-card" data-category="news">
+            <div class="card-header" onclick="toggleCodeCard(this)">
+                <div class="card-title">DETIK NEWS</div>
+                <div class="badge">GET<i class="fas fa-chevron-down toggle-arrow"></i></div>
+            </div>
+            <div class="card-body">
+                <div class="code-container">
+                    <button class="copy-btn" onclick="copyCode(this)">
+                        <i class="fas fa-copy"></i>
+                    </button>
+                    <pre><code>
+case 'detiknews': {
+                        try {
+                            const getDetikNews = async () => {
+                                const url = "https://www.detik.com/terpopuler";
+                                const { data } = await axios.get(url);
+                                const $ = cheerio.load(data);
+                                let result = [];
+                                $(".list-content_item").slice(0, 5).each((, el) => {
+                                    const title = $(el).find(".media__title a").text().trim();
+                                    const url = $(el).find(".media__title a").attr("href");
+                                    const description = $(el).find(".media__desc").text().trim();
+                                    result.push({ title, url, description });
+                                });
+                                return result;
+                            };
+                            const news = await getDetikNews();
+                            if (!news.length) return m.reply("Tidak ada berita yang ditemukan.");
+                            let newsText = "📰 5 BERITA TERBARU DETIK.COM\n\n";
+                            news.forEach((item, i) => {
+                                newsText += *${i + 1}. ${item.title}*\n;
+                                newsText += ➤ ${item.description}\n;
+                                newsText += 🔗 ${item.url}\n\n;
+                            });
+                            m.reply(newsText);
+                        } catch (e) {
+                            console.error("Detik error:", e);
+                            m.reply("Gagal mengambil berita. Coba lagi nanti.");
+                        }
+                    }
+                    break;
+                        </code></pre>
+                </div>
+                <div class="file-info">
+                    <span>Type : JavaScript</span>
+                    <span>99% working</span>
+                </div>
+            </div>
+            <div class="stats">
+                <span><i class="fas fa-copy"></i> 99+ copies</span>
+                <span><i class="fas fa-calendar-alt"></i> Updated : 30 April 2025</span>
+            </div>
+        </div>
+          <div class="code-card" data-category="searching">
+            <div class="card-header" onclick="toggleCodeCard(this)">
+                <div class="card-title">SPOTIFY SEARCH</div>
+                <div class="badge">GET<i class="fas fa-chevron-down toggle-arrow"></i></div>
+            </div>
+            <div class="card-body">
+                <div class="code-container">
+                    <button class="copy-btn" onclick="copyCode(this)">
+                        <i class="fas fa-copy"></i>
+                    </button>
+                    <pre><code>
+case 'spotify':
+case 'spotifysearch': {
+                          if (!text) return m.reply("Masukkan judul lagu.");
+                          try {
+                              const { thumbnail, title, author, audio } = await spotifySearch(text);
+                              if (!audio) return m.reply("Lagu tidak ditemukan atau tidak bisa diunduh.");
+                              m.reply(Lagu ditemukan:\n\nJudul: ${title}\nArtis: ${author}\n\nMengirim audio...);
+                              await conn.sendMessage(m.chat, {
+                                  audio: { url: audio },
+                                  mimetype: 'audio/mpeg',
+                                  fileName: ${title}.mp3.replace(/[^\w\s]/gi, ''),
+                                  contextInfo: {
+                                      externalAdReply: {
+                                          title: title,
+                                          body: author,
+                                          thumbnailUrl: thumbnail,
+                                          sourceUrl: 'https://open.spotify.com',
+                                          mediaType: 1,
+                                          renderLargerThumbnail: true
+                                      }
+                                  }
+                              }, { quoted: m });
+                          } catch {
+                              m.reply("Gagal mengunduh lagu. Coba lagi nanti.");
+                          }
+                      }
+                      break;
+                        </code></pre>
+                </div>
+                <div class="file-info">
+                    <span>Type : JavaScript</span>
+                    <span>99% working</span>
+                </div>
+            </div>
+            <div class="stats">
+                <span><i class="fas fa-copy"></i> 99+ copies</span>
+                <span><i class="fas fa-calendar-alt"></i> Updated : 30 April 2025</span>
+            </div>
+        </div>
+          <div class="code-card" data-category="searching">
+            <div class="card-header" onclick="toggleCodeCard(this)">
+                <div class="card-title">GOOGLE SEARCH</div>
+                <div class="badge">GET<i class="fas fa-chevron-down toggle-arrow"></i></div>
+            </div>
+            <div class="card-body">
+                <div class="code-container">
+                    <button class="copy-btn" onclick="copyCode(this)">
+                        <i class="fas fa-copy"></i>
+                    </button>
+                    <pre><code>
+case "google":
+case "searchgoogle": {
+                          if (!q) return m.reply("Masukkan kata kunci pencarian.");
+                          try {
+                              let url = https://api.hiuraa.my.id/search/google?q=${encodeURIComponent(q)};
+                              let res = await fetch(url);
+                              let json = await res.json();
+                              if (!json.status || !json.result.length) {
+                                  return m.reply("Tidak ada hasil ditemukan.");
+                              }
+                              let hasil = json.result.slice(0, 5).map((item, i) =>
+                                  📌 *${i + 1}. ${item.title}*\n${item.desc}\n🔗 ${item.link}
+                              ).join("\n\n");
+                              m.reply(Hasil Pencarian Google:\n\n${hasil});
+                          } catch {
+                              m.reply("Terjadi kesalahan saat mencari.");
+                          }
+                      }
+                      break;
+                        </code></pre>
+                </div>
+                <div class="file-info">
+                    <span>Type : JavaScript</span>
+                    <span>99% working</span>
+                </div>
+            </div>
+            <div class="stats">
+                <span><i class="fas fa-copy"></i> 99+ copies</span>
+                <span><i class="fas fa-calendar-alt"></i> Updated : 30 April 2025</span>
+            </div>
+        </div>
+          <div class="code-card" data-category="downloader">
+            <div class="card-header" onclick="toggleCodeCard(this)">
+                <div class="card-title">TIKTOK MP4 & MP3 DOWNLOADER</div>
+                <div class="badge">GET<i class="fas fa-chevron-down toggle-arrow"></i></div>
+            </div>
+            <div class="card-body">
+                <div class="code-container">
+                    <button class="copy-btn" onclick="copyCode(this)">
+                        <i class="fas fa-copy"></i>
+                    </button>
+                    <pre><code>
+  case 'tiktok':
+  case 'tt': {
+                          if (!text || !text.includes('tiktok')) return m.reply("Masukkan link TikTok yang valid.");
+                          m.reply('⏳ Sedang memproses...');
+                          try {
+                              let apiUrl = https://api.tiklydown.eu.org/api/download/v5?url=${encodeURIComponent(text)};
+                              let res = await fetchJson(apiUrl);
+                              if (res.status !== 200) return m.reply("Gagal mengambil data.");
+                              let { play, music } = res.result;
+                              await conn.sendMessage(m.chat, { video: { url: play }, caption: 'Berhasil mengunduh video!' }, { quoted: m });
+                              await conn.sendMessage(m.chat, { audio: { url: music }, mimetype: 'audio/mp4' }, { quoted: m });
+                          } catch {
+                              m.reply('Terjadi kesalahan.');
+                          }
+                      }
+                      break;
+                        </code></pre>
+                </div>
+                <div class="file-info">
+                    <span>Type : JavaScript</span>
+                    <span>99% working</span>
+                </div>
+            </div>
+            <div class="stats">
+                <span><i class="fas fa-copy"></i> 99+ copies</span>
+                <span><i class="fas fa-calendar-alt"></i> Updated : 30 April 2025</span>
+            </div>
+        </div>
+          <div class="code-card" data-category="convert">
+            <div class="card-header" onclick="toggleCodeCard(this)">
+                <div class="card-title">HD IMAGE</div>
+                <div class="badge">GET<i class="fas fa-chevron-down toggle-arrow"></i></div>
+            </div>
+            <div class="card-body">
+                <div class="code-container">
+                    <button class="copy-btn" onclick="copyCode(this)">
+                        <i class="fas fa-copy"></i>
+                    </button>
+                    <pre><code>
+case 'hd':
+case 'remini': {
+                          if (!m.quoted) return conn.sendMessage(m.chat, { text: "❗ Reply gambar yang ingin diperjelas." }, { quoted: m });
+                          let mime = (m.quoted.msg || m.quoted).mimetype || '';
+                          if (!/image\/(jpe?g|png)/.test(mime)) {
+                              return conn.sendMessage(m.chat, { text: "❗ Format tidak didukung! Kirim gambar JPG, JPEG, atau PNG." }, { quoted: m });
+                          }
+                          conn.sendMessage(m.chat, { text: "⏳ Sedang memproses gambar, tunggu sebentar..." }, { quoted: m });
+                          try {
+                              let img = await m.quoted.download();
+                              const form = new FormData();
+                              form.append('reqtype', 'fileupload');
+                              form.append('fileToUpload', img, 'image.jpg');
+                              const res = await fetch('https://catbox.moe/user/api.php', {
+                                  method: 'POST',
+                                  body: form
+                              });
+                              const url = await res.text();
+                              if (!url.startsWith('http')) throw 'Upload gagal.';
+                              const hdRes = await fetch(https://fastrestapis.fasturl.cloud/aiimage/upscale?imageUrl=${encodeURIComponent(url)}&resize=4);
+                              const buffer = await hdRes.buffer();
+                              await conn.sendMessage(m.chat, {
+                                  image: buffer,
+                                  caption: "✅ Gambar berhasil diperjelas (HD)."
+                              }, { quoted: m });
+                          } catch (err) {
+                              console.error(err);
+                              conn.sendMessage(m.chat, { text: "❌ Terjadi kesalahan. Silakan coba lagi nanti." }, { quoted: m });
+                          }
+                      }
+                      break;
+                        </code></pre>
+                </div>
+                <div class="file-info">
+                    <span>Type : JavaScript</span>
+                    <span>99% working</span>
+                </div>
+            </div>
+            <div class="stats">
+                <span><i class="fas fa-copy"></i> 99+ copies</span>
+                <span><i class="fas fa-calendar-alt"></i> Updated : 30 April 2025</span>
+            </div>
+        </div>
+          <div class="code-card" data-category="maker">
+                <div class="card-header" onclick="toggleCodeCard(this)">
+                    <div class="card-title">BRAT ANOMALI</div>
+                    <div class="badge">GET<i class="fas fa-chevron-down toggle-arrow"></i></div>
+                </div>
+                <div class="card-body">
+                    <div class="code-container">
+                        <button class="copy-btn" onclick="copyCode(this)">
+                            <i class="fas fa-copy"></i>
+                        </button>
+                        <pre><code>
+  case 'brat': {
+                          if (!text && !(m.quoted && m.quoted.text)) {
+                              return conn.sendMessage(m.chat, { text: > Gunakan perintah berikut:\n- *.brat <teks>*\n- *Reply teks dengan *.brat* }, { quoted: m });
+                          }
+                          let text = text || m.quoted.text;
+                          conn.sendMessage(m.chat, { text: "⏳ Sedang memproses gambar..." }, { quoted: m });
+                          try {
+                              let bratBuffer = await getBuffer(https://aqul-brat.hf.space/api/brat?text=${encodeURIComponent(text)});
+                              let inputPath = "./temp/brat.jpg";
+                              let outputPath = "./temp/brat.webp";
+                              await writeFile(inputPath, bratBuffer);
+                              exec(ffmpeg -i ${inputPath} -vf scale=512:512 -q:v 20 ${outputPath}, async () => {
+                                  await conn.sendMessage(m.chat, { 
+                                      sticker: fs.readFileSync(outputPath), 
+                                      caption: "🎨 Hasil Brat Sticker"
+                                  }, { quoted: m });
+                                  fs.unlinkSync(inputPath);
+                                  fs.unlinkSync(outputPath);
+                              });
+                          } catch (err) {
+                              console.error("Brat Error:", err);
+                              conn.sendMessage(m.chat, { text: "❌ Terjadi kesalahan saat membuat sticker Brat. Coba lagi nanti." }, { quoted: m });
+                          }
+                      }
+                      break;
+                            </code></pre>
+                    </div>
+                    <div class="file-info">
+                        <span>Type : JavaScript</span>
+                        <span>99% working</span>
+                    </div>
+                </div>
+                <div class="stats">
+                    <span><i class="fas fa-copy"></i> 99+ copies</span>
+                    <span><i class="fas fa-calendar-alt"></i> Updated : 30 April 2025</span>
+                </div>
+            </div>
+            <div class="code-card" data-category="searching">
+                <div class="card-header" onclick="toggleCodeCard(this)">
+                    <div class="card-title">PINTEREST SEARCH</div>
+                    <div class="badge">GET<i class="fas fa-chevron-down toggle-arrow"></i></div>
+                </div>
+                <div class="card-body">
+                    <div class="code-container">
+                        <button class="copy-btn" onclick="copyCode(this)">
+                            <i class="fas fa-copy"></i>
+                        </button>
+                        <pre><code>
+  case 'pinterest':
+  case 'pin': {
+                              if (!text) return conn.sendMessage(m.chat, { text: "❗ Masukkan kata kunci pencarian!\nContoh: .pinterest kucing lucu" }, { quoted: m });
+                              conn.sendMessage(m.chat, { text: "⏳ Sedang mencari gambar di Pinterest..." }, { quoted: m });
+                              try {
+                                  const { GOOGLE_IMG_SCRAP } = require('google-img-scrap');
+                                  const result = await GOOGLE_IMG_SCRAP({ search: text, limit: 3, domains: ["pinterest.com"] });
+                                  const images = result.result;
+                                  if (!images || images.length === 0) {
+                                      return conn.sendMessage(m.chat, { text: "❌ Tidak ditemukan gambar dari Pinterest!" }, { quoted: m });
+                                  }
+                                  let caption = 🔎 *Hasil pencarian untuk:* ${text}\n\n;
+                                  for (let i = 0; i < images.length; i++) {
+                                      caption += > *Gambar ${i + 1}*\n🔗 ${images[i].url}\n\n;
+                                      await conn.sendMessage(m.chat, {
+                                          image: { url: images[i].url },
+                                          caption: > *Gambar ${i + 1} dari Pinterest*
+                                      }, { quoted: m });
+                                      await sleep(1000);
+                                  }
+                                  conn.sendMessage(m.chat, { text: caption }, { quoted: m });
+                              } catch (e) {
+                                  console.error("Pinterest Error:", e);
+                                  conn.sendMessage(m.chat, { text: "❌ Terjadi kesalahan saat mengambil gambar. Coba lagi nanti." }, { quoted: m });
+                              }
+                          }
+                          break;
+                            </code></pre>
+                    </div>
+                    <div class="file-info">
+                        <span>Type : JavaScript</span>
+                        <span>99% working</span>
+                    </div>
+                </div>
+                <div class="stats">
+                    <span><i class="fas fa-copy"></i> 99+ copies</span>
+                    <span><i class="fas fa-calendar-alt"></i> Updated : 30 April 2025</span>
+                </div>
+            </div>
+            <!-- JavaScript Category -->
+            <div class="code-card" data-category="downloader">
+                <div class="card-header" onclick="toggleCodeCard(this)">
+                    <div class="card-title">YTMP4</div>
+                    <div class="badge">GET<i class="fas fa-chevron-down toggle-arrow"></i></div>
+                </div>
+                <div class="card-body">
+                    <div class="code-container">
+                        <button class="copy-btn" onclick="copyCode(this)">
+                            <i class="fas fa-copy"></i>
+                        </button>
+                        <pre><code>
+case 'ytmp4':
+case 'ytvideo':
+case 'ytv': {
+                              if (!text) {
+                                  return conn.sendMessage(m.chat, { text: 
+                                      🎥 *YouTube Video Downloader*\n +
+                                      ────────────────────\n +
+                                      🔍 Download video YouTube dalam berbagai kualitas\n\n +
+                                      📝 Cara Penggunaan:\n +
+                                      ${prefix}ytmp4 <link YouTube>\n\n +
+                                      💡 Contoh:\n +
+                                      ${prefix}ytmp4 https://youtu.be/contoh123\n +
+                                      atau\n +
+                                      ${prefix}ytmp4 https://youtube.com/shorts/contoh456\n\n +
+                                      ✨ Fitur:\n +
+                                      - Support video biasa & shorts\n +
+                                      - Multi kualitas (360p, 480p, 720p, 1080p)\n +
+                                      - Info lengkap video\n +
+                                      ────────────────────
+                                  }, { quoted: m });
+                              }
+                              await conn.sendMessage(m.chat, { text: "⏳ Sedang memproses video..." }, { quoted: m });
+                              try {
+                                  const resolutions = ['1080', '720', '480', '360'];
+                                  let videoData = null;
+                                  for (const quality of resolutions) {
+                                      try {
+                                          const apiUrl = https://fastrestapis.fasturl.cloud/downup/ytmp4?url=${encodeURIComponent(text)}&quality=${quality};
+                                          const res = await fetchJson(apiUrl);
+                                          if (res?.status === 200 && res?.result?.media) {
+                                              videoData = res;
+                                              break;
+                                          }
+                                      } catch (e) {
+                                          console.error(Error saat mencoba kualitas ${quality}:, e);
+                                      }
+                                  }
+                                  if (!videoData) {
+                                      return conn.sendMessage(m.chat, { text: "❌ Gagal mendapatkan video. Pastikan link valid atau coba lagi nanti." }, { quoted: m });
+                                  }
+                                  const { title, metadata, author, media, quality } = videoData.result;
+                                  const caption = `
+                          🎥 YouTube Video Downloader
+                          ────────────────────
+                          > Judul: ${title}
+                          👤 Channel: ${author.name}
+                          ⏱ Durasi: ${metadata.duration}
+                          👀 Views: ${metadata.views}
+                          📅 Upload: ${metadata.uploadDate}
+                          📊 Kualitas: ${quality}
+                          ────────────────────
+                          `.trim();
+                                  await conn.sendMessage(m.chat, {
+                                      image: { url: metadata.thumbnail },
+                                      caption: caption
+                                  }, { quoted: m });
+                                  await conn.sendMessage(m.chat, {
+                                      video: { url: media },
+                                      mimetype: 'video/mp4',
+                                      caption: ${title}
+                                  }, { quoted: m });
+                              } catch (err) {
+                                  console.error("Error di ytmp4:", err);
+                                  await conn.sendMessage(m.chat, { text: "❌ Gagal memproses video. Coba lagi nanti atau gunakan link berbeda." }, { quoted: m });
+                              }
+                          }
+                          break;
+                            </code></pre>
+                    </div>
+                    <div class="file-info">
+                        <span>Type : JavaScript</span>
+                        <span>99% working</span>
+                    </div>
+                </div>
+                <div class="stats">
+                    <span><i class="fas fa-copy"></i> 99+ copies</span>
+                    <span><i class="fas fa-calendar-alt"></i> Updated : 30 April 2025</span>
+                </div>
+            </div>
+            <div class="code-card" data-category="downloader">
+                <div class="card-header" onclick="toggleCodeCard(this)">
+                    <div class="card-title">YTMP3</div>
+                    <div class="badge">GET<i class="fas fa-chevron-down toggle-arrow"></i></div>
+                </div>
+                <div class="card-body">
+                    <div class="code-container">
+                        <button class="copy-btn" onclick="copyCode(this)">
+                            <i class="fas fa-copy"></i>
+                        </button>
+                        <pre><code>
+case 'ytmp3': 
+case 'yta': {
+                              if (!text) {
+                                  return await conn.sendMessage(m.chat, { text: ⚠ Masukkan URL YouTube!\n\nContoh: \.ytmp3 https://youtu.be/dQw4w9WgXcQ\`` }, { quoted: m });
+                              }
+                              await conn.sendMessage(m.chat, { text: "⏳ Sedang memproses audio..." }, { quoted: m });
+                              try {
+                                  class Ytdl {
+                                      constructor() {
+                                          this.baseUrl = "https://p.oceansaver.in/ajax/";
+                                          this.userAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, seperti Gecko) Chrome/91.0.4472.124 Safari/537.36";
+                                      }
+                                      async cekProgress(id) {
+                                          const config = {
+                                              method: "GET",
+                                              url: ${this.baseUrl}progress.php?id=${id},
+                                              headers: { "User-Agent": this.userAgent }
+                                          };
+                                          while (true) {
+                                              const response = await axios.request(config);
+                                              if (response.data?.success && response.data.progress === 1000) {
+                                                  return response.data.download_url;
+                                              }
+                                              await new Promise(resolve => setTimeout(resolve, 5000));
+                                          }
+                                      }
+                                      async download(url, format) {
+                                          const formatAudio = ["mp3", "m4a", "webm", "aac", "flac", "opus", "ogg", "wav"];
+                                          if (!formatAudio.includes(format)) throw new Error("Format yang diberikan tidak valid.");
+                                          const config = {
+                                              method: "GET",
+                                              url: ${this.baseUrl}download.php?format=${format}&url=${encodeURIComponent(url)}&api=dfcb6d76f2f6a9894gjkege8a4ab232222,
+                                              headers: { "User-Agent": this.userAgent }
+                                          };
+                                          const response = await axios.request(config);
+                                          if (response.data?.success) {
+                                              const { id, title, info: { image } } = response.data;
+                                              const downloadUrl = await this.cekProgress(id);
+                                              return { id, title, image, downloadUrl };
+                                          } else {
+                                              throw new Error("Gagal mengambil detail video.");
+                                          }
+                                      }
+                                  }
+                                  const ytdl = await new Ytdl().download(text, "mp3");
+                                  await conn.sendMessage(m.chat, { react: { text: "✅", key: m.key } });
+                                  await conn.sendMessage(m.chat, {
+                                      audio: { url: ytdl.downloadUrl },
+                                      mimetype: "audio/mpeg",
+                                      fileName: ytdl.title,
+                                      contextInfo: {
+                                          externalAdReply: {
+                                              showAdAttribution: true,
+                                              mediaType: 2,
+                                              mediaUrl: text,
+                                              title: ytdl.title,
+                                              body: "Bot WhatsApp",
+                                              sourceUrl: text,
+                                              thumbnailUrl: ytdl.image,
+                                          },
+                                      },
+                                  }, { quoted: m });
+                              } catch (error) {
+                                  console.error("Error:", error);
+                                  await conn.sendMessage(m.chat, { react: { text: "❌", key: m.key } });
+                                  await conn.sendMessage(m.chat, { text: "Server Sedang Dalam Gangguan Cobalah Beberapa Jam Kedepan." });
+                              }
+                          }
+                          break;
+                            </code></pre>
+                    </div>
+                    <div class="file-info">
+                        <span>Type : JavaScript</span>
+                        <span>99% working</span>
+                    </div>
+                </div>
+                <div class="stats">
+                    <span><i class="fas fa-copy"></i> 99+ copies</span>
+                    <span><i class="fas fa-calendar-alt"></i> Updated : 30 April 2025</span>
+                </div>
+            </div>
+<!-- Floating Message Button -->
+<a href="https://wa.me/62895340402347?text=Hi%20Moontech,%20I%20want%20to%20request%20a%20code" class="float-whatsapp" target="_blank">
+    <i class="fas fa-comment-alt"></i>
+    <span class="tooltip">Request Code</span>
+</a>
+        <footer>
+            <p>© 2025 Moontech CodeX. All rights reserved. | Code library for developers</p>
+        </footer>
+    </div>
+    <script>
+        // JavaScript will be placed here
+    </script>
+<script src="../code/code.js"></script>
+</body>
+</html>

@@ -1,0 +1,292 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+@keyframes shake {
+  0% { transform: translate(0); }
+  25% { transform: translate(-5px, 0); }
+  50% { transform: translate(5px, 0); }
+  75% { transform: translate(-5px, 0); }
+  100% { transform: translate(0); }
+}
+
+.shake {
+  animation: shake 0.5s;
+}
+
+.kategori-aktif {
+  background-color: #1d4ed8;
+  color: white;
+  transform: scale(1.05);
+  transition: all 0.3s ease;
+}
+
+.produk-card {
+  transition: all 0.3s ease;
+  display: block;
+}
+
+.produk-card.hidden {
+  display: none;
+}
+
+/* Dark Mode */
+body.dark-mode {
+  background-color: #121212;
+  color: white;
+}
+
+body.dark-mode .bg-white {
+  background-color: #1f1f1f;
+}
+
+body.dark-mode .bg-gray-100 {
+  background-color: #2c2c2c;
+}
+
+body.dark-mode .text-gray-800 {
+  color: white;
+}
+
+body.dark-mode .text-gray-600 {
+  color: #bbb;
+}
+
+body.dark-mode .bg-blue-700 {
+  background-color: #4a90e2;
+}
+
+body.dark-mode .bg-blue-600 {
+  background-color: #4a90e2;
+}
+
+body.dark-mode .bg-green-500 {
+  background-color: #228b22;
+}
+
+body.dark-mode .bg-green-600 {
+  background-color: #2b8c3b;
+}
+
+/* Splash screen */
+#splash-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(120deg, #6dd5fa, #ffffff);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  transition: opacity 1s ease;
+}
+
+#splash-logo {
+  width: 120px;
+  height: 120px;
+  margin-bottom: 20px;
+}
+
+@keyframes dayNight {
+  0%, 100% { background: linear-gradient(120deg, #ffffff, #ffffff); }
+  50% { background: linear-gradient(120deg, #a9abac, #e7ecee); }
+}
+
+.animate-day-night {
+  animation: dayNight 3s infinite alternate;
+}
+
+/* New Navbar Styles */
+.navbar {
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  font-weight: 700;
+  font-size: 1.25rem;
+}
+
+.navbar-brand img {
+  margin-right: 10px;
+}
+
+.nav-link {
+  position: relative;
+  padding: 0.5rem 1rem;
+  transition: all 0.3s ease;
+}
+
+.nav-link:hover {
+  color: #ffffff;
+}
+
+.nav-link:after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: #ffffff;
+  transition: width 0.3s ease;
+}
+
+.nav-link:hover:after {
+  width: 100%;
+}
+
+.navbar-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.mobile-menu-button {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .mobile-menu-button {
+    display: block;
+  }
+  .navbar-menu {
+    display: none;
+  }
+  .navbar-menu.active {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 1rem;
+    z-index: 1000;
+  }
+}
+
+/* Custom scrollbar for categories */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scroll-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.scroll-button.left {
+  left: 0;
+}
+
+.scroll-button.right {
+  right: 0;
+}
+
+.scroll-button:hover {
+  background: rgba(255, 255, 255, 0.9);
+}
+
+/* Enhanced Contact Section */
+#contact {
+  background-attachment: fixed;
+}
+
+#contact-form input,
+#contact-form textarea {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+#contact-form button {
+  background-size: 200% auto;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+#contact-form button:hover {
+  background-position: right center;
+  transform: translateY(-2px);
+}
+
+.contact-info-item {
+  transition: all 0.3s ease;
+}
+
+.contact-info-item:hover {
+  transform: translateY(-3px);
+}
+
+
+/* Untuk produk VPS */
+.produk-card[data-kategori="bot"]:nth-child(2) {
+  position: relative;
+  overflow: hidden;
+  opacity: 0.7;
+  pointer-events: none;
+  filter: grayscale(50%);
+}
+
+.produk-card[data-kategori="bot"]:nth-child(2)::after {
+  content: "CLOSE";
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: #ef4444; /* Warna merah */
+  color: white;
+  font-size: 10px;
+  font-weight: bold;
+  padding: 3px 8px;
+  border-radius: 0 8px 0 8px;
+  transform: rotate(15deg);
+  transform-origin: bottom right;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+/* Untuk produk Sewa Bot */
+.produk-card[data-kategori="bot"]:nth-child(4) {
+  position: relative;
+  overflow: hidden;
+  opacity: 0.7;
+  pointer-events: none;
+  filter: grayscale(50%);
+}
+
+.produk-card[data-kategori="bot"]:nth-child(4)::after {
+  content: "CLOSE";
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: #ef4444; /* Warna merah */
+  color: white;
+  font-size: 10px;
+  font-weight: bold;
+  padding: 3px 8px;
+  border-radius: 0 8px 0 8px;
+  transform: rotate(15deg);
+  transform-origin: bottom right;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}

@@ -24,7 +24,8 @@
     <i class="fas fa-spinner fa-spin text-2xl text-black"></i>
   </div>
 </div>
-  <!-- New Professional Navbar -->
+	
+<!-- New Professional Navbar -->
 <nav class="navbar text-[#921A40] bg-[#FFDCDC] py-4 px-6 md:px-10 fixed w-full z-50">
   <div class="navbar-container flex justify-between items-center">
     <div class="navbar-brand flex items-center space-x-2">
@@ -48,15 +49,16 @@
     </div>
   </div>
 </nav>
-    <!-- Mobile Menu -->
-    <div id="mobile-menu" class="navbar-menu hidden md:hidden">
-      <a href="index.html" class="nav-link py-2">Beranda</a>
-      <a href="#produk" class="nav-link py-2">Service</a>
-      <a href="downfile/index.html" class="nav-link py-2">Download</a>
-      <a href="code/index.html" class="nav-link py-2">Code Library</a>
-      <a href="#contact" class="nav-link py-2">Kontak</a>
-    </div>
-  </nav>
+
+<!-- Mobile Menu (posisinya tetap di luar tag <nav>) -->
+<div id="mobile-menu" class="hidden flex-col bg-[#FFDCDC] px-6 py-4 space-y-2 md:hidden z-40 shadow-md fixed top-16 left-0 right-0">
+  <a href="index.html" class="nav-link text-[#921A40]">Beranda</a>
+  <a href="#produk" class="nav-link text-[#921A40]">Service</a>
+  <a href="downfile/index.html" class="nav-link text-[#921A40]">Download</a>
+  <a href="code/index.html" class="nav-link text-[#921A40]">Code Library</a>
+  <a href="#contact" class="nav-link text-[#921A40]">Kontak</a>
+</div>
+	
   <!-- Hero Section -->
 <section class="flex flex-col-reverse md:flex-row items-center justify-between px-6 md:px-20 pt-32 pb-10 bg-white" data-aos="fade-up">
   <div class="md:w-1/2 text-center md:text-left">

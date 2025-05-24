@@ -241,8 +241,8 @@ body.dark-mode .bg-green-600 {
 }
 
 
-/* Untuk produk VPS */
-.produk-card[data-kategori="bot"]:nth-child(2) {
+/* VPS - CLOSE */
+.produk-card.vps {
   position: relative;
   overflow: hidden;
   opacity: 0.7;
@@ -250,32 +250,7 @@ body.dark-mode .bg-green-600 {
   filter: grayscale(50%);
 }
 
-.produk-card[data-kategori="bot"]:nth-child(2)::after {
-  content: "CLOSE";
-  position: absolute;
-  top: 0;
-  right: 0;
-  background-color: #ef4444; /* Warna merah */
-  color: white;
-  font-size: 10px;
-  font-weight: bold;
-  padding: 3px 8px;
-  border-radius: 0 8px 0 8px;
-  transform: rotate(15deg);
-  transform-origin: bottom right;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-}
-
-/* SERVICE BOTTING - CLOSE */
-.produk-card[data-kategori="bot"]:nth-child(3) {
-  position: relative;
-  overflow: hidden;
-  opacity: 0.7;
-  pointer-events: none;
-  filter: grayscale(50%);
-}
-
-.produk-card[data-kategori="bot"]:nth-child(3)::after {
+.produk-card.vps::after {
   content: "CLOSE";
   position: absolute;
   top: 0;
@@ -288,10 +263,39 @@ body.dark-mode .bg-green-600 {
   border-radius: 0 8px 0 8px;
   transform: rotate(15deg);
   transform-origin: bottom right;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
-/* Badge untuk SEWA BOT */
+/* SERVICE BOTTING - CLOSE */
+.produk-card.service-bot {
+  position: relative;
+  overflow: hidden;
+  opacity: 0.7;
+  pointer-events: none;
+  filter: grayscale(50%);
+}
+
+.produk-card.service-bot::after {
+  content: "CLOSE";
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: #ef4444;
+  color: white;
+  font-size: 10px;
+  font-weight: bold;
+  padding: 3px 8px;
+  border-radius: 0 8px 0 8px;
+  transform: rotate(15deg);
+  transform-origin: bottom right;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* SEWA BOT - OPEN ORDER */
+.produk-card.sewa-bot {
+  position: relative;
+}
+
 .produk-card.sewa-bot::after {
   content: "OPEN ORDER";
   position: absolute;
@@ -309,7 +313,11 @@ body.dark-mode .bg-green-600 {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
-/* Badge untuk TOP UP APP */
+/* TOP UP APP - OPEN */
+.produk-card.topup-app {
+  position: relative;
+}
+
 .produk-card.topup-app::after {
   content: "OPEN";
   position: absolute;
@@ -326,4 +334,3 @@ body.dark-mode .bg-green-600 {
   transform-origin: bottom right;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
-

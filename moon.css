@@ -266,8 +266,8 @@ body.dark-mode .bg-green-600 {
   box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 }
 
-/* Untuk produk Sewa Bot */
-.produk-card[data-kategori="bot"]:nth-child(4) {
+/* SERVICE BOTTING - CLOSE */
+.produk-card[data-kategori="bot"]:nth-child(3) {
   position: relative;
   overflow: hidden;
   opacity: 0.7;
@@ -275,14 +275,32 @@ body.dark-mode .bg-green-600 {
   filter: grayscale(50%);
 }
 
-.produk-card[data-kategori="bot"]:nth-child(4)::after {
+.produk-card[data-kategori="bot"]:nth-child(3)::after {
   content: "CLOSE";
   position: absolute;
   top: 0;
   right: 0;
-  background-color: #ef4444; /* Warna merah */
+  background-color: #ef4444;
   color: white;
   font-size: 10px;
+  font-weight: bold;
+  padding: 3px 8px;
+  border-radius: 0 8px 0 8px;
+  transform: rotate(15deg);
+  transform-origin: bottom right;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+/* SEWA BOT - OPEN ORDER */
+.produk-card[data-kategori="bot"]:nth-child(4)::after {
+  content: "OPEN ORDER";
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: #16a34a; /* Hijau */
+  color: white;
+  font-size: 10px;
+  font-style: italic;
   font-weight: bold;
   padding: 3px 8px;
   border-radius: 0 8px 0 8px;

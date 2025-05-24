@@ -33,8 +33,15 @@ mobileMenuToggle.addEventListener('click', () => {
   mobileMenu.classList.toggle('flex'); // gunakan 'flex' untuk menampilkan menu
 });
 
-// Dark mode toggle
+// Auto apply dark mode based on system preference
 const modeToggle = document.getElementById("mode-toggle");
+
+if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+  document.body.classList.add("dark-mode");
+  modeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+}
+
+// Manual toggle button
 modeToggle.addEventListener("click", () => {
   document.body.classList.toggle("dark-mode");
   if (document.body.classList.contains("dark-mode")) {

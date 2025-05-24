@@ -291,40 +291,40 @@ body.dark-mode .bg-green-600 {
   box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 }
 
-/* Badge untuk SEWA BOT */
-.produk-card.sewa-bot::after {
-  content: "OPEN";
-  position: absolute;
-  top: 0.5rem;
-  right: 0.5rem;
-  background-color: #16a34a;
-  color: white;
-  font-size: 10px;
-  font-style: italic;
-  font-weight: bold;
-  padding: 4px 10px;
-  border-radius: 6px;
-  transform: rotate(7deg);
-  transform-origin: top right;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
-  z-index: 10;
-}
+/* Badge untuk SEWA BOT */ 
+/* .produk-card.sewa-bot::after { */
+/*   content: "OPEN"; */
+/*   position: absolute; */
+/*   top: 0.5rem; */
+/*   right: 0.5rem; */
+/*   background-color: #16a34a; */
+/*   color: white; */
+/*   font-size: 10px; */ 
+/*   font-style: italic; */
+/*   font-weight: bold; */
+/*   padding: 4px 10px; */
+/*   border-radius: 6px; */
+/*   transform: rotate(7deg); */
+/*   transform-origin: top right; */
+/*   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15); */
+/*   z-index: 10; */
+/* } */ 
 
 /* Badge untuk TOP UP APP */
-.produk-card.topup-app::after {
-  content: "OPEN";
-  position: absolute;
-  top: 0.5rem;
-  right: 0.5rem;
-  background-color: #16a34a;
-  color: white;
-  font-size: 10px;
-  font-style: italic;
-  font-weight: bold;
-  padding: 4px 10px;
-  border-radius: 6px;
-  transform: rotate(7deg);
-  transform-origin: top right;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
-  z-index: 10;
-}
+/* .produk-card.topup-app::after { */
+/*   content: "OPEN"; */
+/*   position: absolute; */
+/*   top: 0.5rem; */ 
+/*   right: 0.5rem; */
+/*   background-color: #16a34a; */
+/*   color: white; */
+/*   font-size: 10px; */
+/*   font-style: italic; */
+/*   font-weight: bold; */
+/*   padding: 4px 10px; */
+/*   border-radius: 6px; */
+/*   transform: rotate(7deg); */
+/*   transform-origin: top right; */
+ /*  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15); */
+/*   z-index: 10; */
+/* }

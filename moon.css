@@ -291,13 +291,13 @@ body.dark-mode .bg-green-600 {
   box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 }
 
-/* SEWA BOT - OPEN ORDER */
-.produk-card[data-kategori="bot"]:nth-child(4)::after {
+/* Badge untuk SEWA BOT */
+.produk-card.sewa-bot::after {
   content: "OPEN ORDER";
   position: absolute;
   top: 0;
   right: 0;
-  background-color: #16a34a; /* Hijau */
+  background-color: #16a34a;
   color: white;
   font-size: 10px;
   font-style: italic;
@@ -306,16 +306,16 @@ body.dark-mode .bg-green-600 {
   border-radius: 0 8px 0 8px;
   transform: rotate(15deg);
   transform-origin: bottom right;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
-/* TOP UP BOT - OPEN ORDER */
-.produk-card[data-kategori="app"]:nth-child(4)::after {
+/* Badge untuk TOP UP APP */
+.produk-card.topup-app::after {
   content: "OPEN";
   position: absolute;
   top: 0;
   right: 0;
-  background-color: #16a34a; /* Hijau */
+  background-color: #16a34a;
   color: white;
   font-size: 10px;
   font-style: italic;
@@ -324,5 +324,6 @@ body.dark-mode .bg-green-600 {
   border-radius: 0 8px 0 8px;
   transform: rotate(15deg);
   transform-origin: bottom right;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
+

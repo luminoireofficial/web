@@ -308,3 +308,21 @@ body.dark-mode .bg-green-600 {
   transform-origin: bottom right;
   box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 }
+
+/* TOP UP BOT - OPEN ORDER */
+.produk-card[data-kategori="app"]:nth-child(4)::after {
+  content: "OPEN";
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: #16a34a; /* Hijau */
+  color: white;
+  font-size: 10px;
+  font-style: italic;
+  font-weight: bold;
+  padding: 3px 8px;
+  border-radius: 0 8px 0 8px;
+  transform: rotate(15deg);
+  transform-origin: bottom right;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}

@@ -30,7 +30,7 @@ const mobileMenu = document.getElementById('mobile-menu');
 
 mobileMenuToggle.addEventListener('click', () => {
   mobileMenu.classList.toggle('hidden');
-  mobileMenu.classList.toggle('active');
+  mobileMenu.classList.toggle('flex'); // gunakan 'flex' untuk menampilkan menu
 });
 
 // Dark mode toggle
